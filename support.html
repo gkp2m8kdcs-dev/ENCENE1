@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support — ENCENE</title>
+    <meta name="description" content="ENCENE support — get help with portfolio tracking, charts, trades, and exports." />
+    <meta name="theme-color" content="#0B0B12" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%235B6CFF'/%3E%3Ctext x='50' y='66' font-family='-apple-system,BlinkMacSystemFont,sans-serif' font-size='56' font-weight='800' fill='white' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E" />
+    <style>
+        :root {
+            --bg: #0B0B12; --surface: #15151F; --surface-2: #1C1C29;
+            --border: rgba(255,255,255,0.08);
+            --text: #F2F2F7; --text-secondary: #9A9AAE;
+            --accent: #5B6CFF; --accent-2: #7C8CFF; --positive: #3DD68C;
+        }
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg); color: var(--text);
+            line-height: 1.65; -webkit-font-smoothing: antialiased;
+        }
+        a { color: var(--accent-2); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .container { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+        .nav {
+            position: sticky; top: 0; z-index: 50;
+            backdrop-filter: saturate(140%) blur(14px);
+            background: rgba(11,11,18,0.72);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+        .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--text); }
+        .brand-mark {
+            width: 30px; height: 30px; border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent), #8A6CFF);
+            display: grid; place-items: center; color: white; font-weight: 800;
+        }
+        .nav-links { display: flex; gap: 18px; align-items: center; }
+        .nav-links a { color: var(--text-secondary); font-size: 14px; font-weight: 500; }
+        .nav-links a:hover { color: var(--text); text-decoration: none; }
+        .cta-btn {
+            display: inline-block; padding: 9px 14px; border-radius: 10px;
+            background: var(--accent); color: white !important; font-weight: 600; font-size: 13px;
+        }
+        @media (max-width: 640px) { .nav-links a:not(.cta-btn) { display: none; } }
+
+        main { padding: 56px 0 80px; }
+        .page-title { font-size: clamp(30px, 5vw, 44px); font-weight: 800; letter-spacing: -0.8px; margin: 0 0 6px; }
+        .page-sub { color: var(--text-secondary); margin: 0 0 32px; font-size: 15px; max-width: 640px; }
+
+        .contact-card {
+            background: linear-gradient(135deg, rgba(91,108,255,0.18), rgba(138,108,255,0.18));
+            border: 1px solid rgba(91,108,255,0.3); border-radius: 18px;
+            padding: 28px; text-align: center; margin-bottom: 36px;
+        }
+        .contact-card h2 { margin: 0 0 6px; font-size: 22px; }
+        .contact-card p { margin: 0 0 16px; color: var(--text-secondary); font-size: 14.5px; }
+        .mail-btn {
+            display: inline-block; padding: 12px 20px; border-radius: 12px;
+            background: var(--accent); color: white !important; font-weight: 600; font-size: 15px;
+        }
+        .mail-btn:hover { background: #6E7DFF; text-decoration: none; }
+
+        .section-title { font-size: 22px; font-weight: 700; margin: 36px 0 14px; letter-spacing: -0.3px; }
+
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+        @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+        .topic {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 20px;
+        }
+        .topic h3 { margin: 0 0 8px; font-size: 16px; }
+        .topic p { margin: 0; color: var(--text-secondary); font-size: 14px; }
+
+        .faq {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 18px 20px; margin-bottom: 10px;
+        }
+        .faq h3 { margin: 0 0 6px; font-size: 15.5px; }
+        .faq p { margin: 0; color: var(--text-secondary); font-size: 14px; }
+
+        footer { border-top: 1px solid var(--border); padding: 30px 0 40px; color: var(--text-secondary); font-size: 13px; }
+        .foot { display: flex; flex-wrap: wrap; gap: 18px; justify-content: space-between; align-items: center; }
+        .foot a { color: var(--text-secondary); }
+        .foot a:hover { color: var(--text); text-decoration: none; }
+        .foot-links { display: flex; gap: 16px; flex-wrap: wrap; }
+    </style>
+</head>
+<body>
+    <header class="nav">
+        <div class="container nav-inner">
+            <a href="index.html" class="brand">
+                <span class="brand-mark">E</span>
+                <span>ENCENE</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="support.html">Support</a>
+                <a href="terms.html">Terms</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="index.html#download" class="cta-btn">Download</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="page-title">Support</h1>
+            <p class="page-sub">Need help with ENCENE? We're here. Reach out and we'll get back to you as soon as we can.</p>
+
+            <div class="contact-card">
+                <h2>Email us</h2>
+                <p>The fastest way to get a real human response.</p>
+                <a class="mail-btn" href="mailto:berrakcantavan@gmail.com">berrakcantavan@gmail.com</a>
+                <p style="margin-top: 14px; font-size: 13px; color: var(--text-secondary);">Typical reply time: within 2 business days.</p>
+            </div>
+
+            <h2 class="section-title">Common topics</h2>
+            <div class="grid">
+                <div class="topic">
+                    <h3>Getting started</h3>
+                    <p>Open ENCENE, accept the risk disclaimer, and the sample portfolio loads so you can explore every feature immediately. No sign-up required.</p>
+                </div>
+                <div class="topic">
+                    <h3>Logging trades</h3>
+                    <p>Use the Trade tab to add buys and sells. Set the date, price, quantity, fees, currency, and an optional receipt photo or note.</p>
+                </div>
+                <div class="topic">
+                    <h3>Multi-currency</h3>
+                    <p>Pick your base currency in Settings. Holdings in other currencies convert using ENCENE's built-in reference rates.</p>
+                </div>
+                <div class="topic">
+                    <h3>Exports</h3>
+                    <p>Settings → Export Data produces JSON, CSV, or a formatted summary you can share or back up.</p>
+                </div>
+                <div class="topic">
+                    <h3>Charts and data</h3>
+                    <p>Prices, charts, and news in the app are simulated for demonstration. They are not real-time market data.</p>
+                </div>
+                <div class="topic">
+                    <h3>Reset and delete</h3>
+                    <p>Settings → Reset All Data clears local content and reloads the sample dataset. Deleting the app removes everything.</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">Frequently asked questions</h2>
+            <div class="faq">
+                <h3>Does ENCENE connect to my brokerage?</h3>
+                <p>No. ENCENE is a manual tracking and journaling app. You enter your trades yourself; we do not sync with brokerages.</p>
+            </div>
+            <div class="faq">
+                <h3>Are the prices real?</h3>
+                <p>No. ENCENE ships with simulated market data for demonstration. Do not use the app for actual trading decisions.</p>
+            </div>
+            <div class="faq">
+                <h3>Where is my data stored?</h3>
+                <p>On your iPhone only. ENCENE does not upload your trades, receipts, or notes to any server.</p>
+            </div>
+            <div class="faq">
+                <h3>Can I get my data out?</h3>
+                <p>Yes. Use the in-app Export feature any time to produce a JSON, CSV, or summary file.</p>
+            </div>
+            <div class="faq">
+                <h3>Which devices are supported?</h3>
+                <p>iPhone running iOS 16 and above.</p>
+            </div>
+
+            <h2 class="section-title">Send feedback</h2>
+            <p style="color: var(--text-secondary);">Found a bug, have an idea, or want to request a feature? Email <a href="mailto:berrakcantavan@gmail.com">berrakcantavan@gmail.com</a> with as much detail as you can — screenshots help a lot.</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container foot">
+            <div>© 2026 ENCENE. All rights reserved.</div>
+            <div class="foot-links">
+                <a href="index.html">Home</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+                <a href="mailto:berrakcantavan@gmail.com">berrakcantavan@gmail.com</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

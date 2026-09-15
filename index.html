@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ENCENE — Premium Global Portfolio Tracker</title>
+    <meta name="description" content="ENCENE is a premium portfolio tracker for global markets. Log every trade, attach receipts, see live K-line charts, sector allocation, and your true position — all without an account." />
+    <meta name="theme-color" content="#0B0B12" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%235B6CFF'/%3E%3Ctext x='50' y='66' font-family='-apple-system,BlinkMacSystemFont,sans-serif' font-size='56' font-weight='800' fill='white' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E" />
+    <style>
+        :root {
+            --bg: #0B0B12;
+            --surface: #15151F;
+            --surface-2: #1C1C29;
+            --border: rgba(255,255,255,0.08);
+            --text: #F2F2F7;
+            --text-secondary: #9A9AAE;
+            --accent: #5B6CFF;
+            --accent-2: #7C8CFF;
+            --positive: #3DD68C;
+            --negative: #FF5C7A;
+            --warm: #FFB24D;
+        }
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        a { color: var(--accent-2); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+        /* Nav */
+        .nav {
+            position: sticky; top: 0; z-index: 50;
+            backdrop-filter: saturate(140%) blur(14px);
+            -webkit-backdrop-filter: saturate(140%) blur(14px);
+            background: rgba(11,11,18,0.72);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+        .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: 0.4px; color: var(--text); }
+        .brand-mark {
+            width: 30px; height: 30px; border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent), #8A6CFF);
+            display: grid; place-items: center; color: white; font-weight: 800;
+        }
+        .nav-links { display: flex; gap: 22px; align-items: center; }
+        .nav-links a { color: var(--text-secondary); font-size: 14px; font-weight: 500; }
+        .nav-links a:hover { color: var(--text); text-decoration: none; }
+        .cta-btn {
+            display: inline-block; padding: 10px 16px; border-radius: 10px;
+            background: var(--accent); color: white !important; font-weight: 600; font-size: 14px;
+        }
+        .cta-btn:hover { background: #6E7DFF; text-decoration: none; }
+        @media (max-width: 640px) { .nav-links a:not(.cta-btn) { display: none; } }
+
+        /* Hero */
+        .hero { padding: 88px 0 64px; position: relative; overflow: hidden; }
+        .hero::before {
+            content: ""; position: absolute; inset: -40% -10% auto -10%; height: 600px;
+            background: radial-gradient(60% 60% at 50% 0%, rgba(91,108,255,0.28), transparent 70%);
+            pointer-events: none;
+        }
+        .eyebrow {
+            display: inline-block; padding: 6px 12px; border-radius: 999px;
+            background: rgba(91,108,255,0.14); color: var(--accent-2);
+            font-size: 12px; font-weight: 600; letter-spacing: 0.4px;
+            border: 1px solid rgba(91,108,255,0.25);
+        }
+        .hero h1 {
+            font-size: clamp(36px, 6vw, 64px); line-height: 1.05; margin: 18px 0 14px;
+            font-weight: 800; letter-spacing: -1.2px;
+        }
+        .hero h1 span { background: linear-gradient(135deg, #8A6CFF, #5B6CFF); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .hero p.lead { font-size: 18px; color: var(--text-secondary); max-width: 640px; }
+        .hero-cta { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 13px 20px; border-radius: 12px; font-weight: 600; font-size: 15px;
+            border: 1px solid transparent; cursor: pointer;
+        }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-primary:hover { background: #6E7DFF; text-decoration: none; }
+        .btn-ghost { background: transparent; color: var(--text); border-color: var(--border); }
+        .btn-ghost:hover { border-color: rgba(255,255,255,0.18); text-decoration: none; }
+
+        /* Phone mock */
+        .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
+        @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+        .phone {
+            position: relative; aspect-ratio: 9/19; max-width: 360px; margin: 0 auto;
+            background: #0a0a14;
+            border-radius: 44px; padding: 14px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.06);
+        }
+        .phone-screen {
+            width: 100%; height: 100%; border-radius: 32px; overflow: hidden;
+            background: linear-gradient(180deg, #11111c 0%, #0c0c15 100%);
+            position: relative; padding: 22px 18px 18px; color: var(--text);
+            display: flex; flex-direction: column; gap: 14px;
+        }
+        .phone-notch {
+            position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+            width: 100px; height: 24px; background: #050508; border-radius: 14px;
+        }
+        .ph-row { display: flex; justify-content: space-between; align-items: center; }
+        .ph-label { color: var(--text-secondary); font-size: 11px; }
+        .ph-val { font-weight: 700; font-size: 13px; }
+        .ph-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 12px; }
+        .ph-hero-num { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+        .ph-pill { display: inline-flex; padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+        .ph-pos { background: rgba(61,214,140,0.14); color: var(--positive); }
+        .ph-neg { background: rgba(255,92,122,0.14); color: var(--negative); }
+        .ph-spark { height: 56px; margin-top: 8px; }
+        .ph-list { display: flex; flex-direction: column; gap: 8px; }
+        .ph-list-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; background: rgba(255,255,255,0.03); border-radius: 10px; }
+        .ph-ticker { font-weight: 700; font-size: 12px; }
+        .ph-name { color: var(--text-secondary); font-size: 10px; }
+
+        /* Sections */
+        section { padding: 72px 0; }
+        .section-head { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+        .section-head h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: -0.8px; margin: 0 0 10px; }
+        .section-head p { color: var(--text-secondary); font-size: 16px; margin: 0; }
+
+        .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        @media (max-width: 900px) { .features { grid-template-columns: 1fr; } }
+        .feature {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 18px; padding: 22px;
+        }
+        .feature-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            display: grid; place-items: center; margin-bottom: 14px;
+            background: rgba(91,108,255,0.14); color: var(--accent-2);
+            font-size: 20px;
+        }
+        .feature h3 { margin: 0 0 6px; font-size: 17px; font-weight: 700; }
+        .feature p { margin: 0; color: var(--text-secondary); font-size: 14px; }
+
+        /* Pillars */
+        .pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+        @media (max-width: 760px) { .pillars { grid-template-columns: 1fr; } }
+        .pillar {
+            background: linear-gradient(180deg, var(--surface), var(--surface-2));
+            border: 1px solid var(--border); border-radius: 20px; padding: 26px;
+        }
+        .pillar h3 { margin: 0 0 8px; font-size: 19px; }
+        .pillar p { margin: 0; color: var(--text-secondary); font-size: 14px; }
+
+        /* Stats */
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 36px; }
+        @media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+        .stat {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 18px; text-align: center;
+        }
+        .stat-num { font-size: 24px; font-weight: 800; letter-spacing: -0.4px; }
+        .stat-label { color: var(--text-secondary); font-size: 12px; margin-top: 4px; }
+
+        /* CTA */
+        .cta-banner {
+            background: linear-gradient(135deg, rgba(91,108,255,0.18), rgba(138,108,255,0.18));
+            border: 1px solid rgba(91,108,255,0.3); border-radius: 22px;
+            padding: 36px; text-align: center; margin: 24px 0 64px;
+        }
+        .cta-banner h2 { margin: 0 0 8px; font-size: 28px; }
+        .cta-banner p { margin: 0 0 18px; color: var(--text-secondary); }
+
+        /* Footer */
+        footer { border-top: 1px solid var(--border); padding: 36px 0 48px; color: var(--text-secondary); }
+        .foot { display: flex; flex-wrap: wrap; gap: 18px; justify-content: space-between; align-items: center; font-size: 13px; }
+        .foot a { color: var(--text-secondary); }
+        .foot a:hover { color: var(--text); text-decoration: none; }
+        .foot-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    </style>
+</head>
+<body>
+    <header class="nav">
+        <div class="container nav-inner">
+            <a href="index.html" class="brand">
+                <span class="brand-mark">E</span>
+                <span>ENCENE</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#privacy">Privacy</a>
+                <a href="support.html">Support</a>
+                <a href="terms.html">Terms</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="#download" class="cta-btn">Download</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <span class="eyebrow">Global portfolio command center</span>
+                    <h1>Track global stocks.<br/><span>Build real wealth.</span></h1>
+                    <p class="lead">ENCENE turns your iPhone into a sophisticated global equity tracker. Log every buy and sell, attach receipts, see live K-line charts, sector allocation, and your true position — all without an account.</p>
+                    <div class="hero-cta">
+                        <a href="#download" class="btn btn-primary">Download on the App Store</a>
+                        <a href="#features" class="btn btn-ghost">Explore features</a>
+                    </div>
+
+                    <div class="stats">
+                        <div class="stat"><div class="stat-num">0</div><div class="stat-label">Accounts required</div></div>
+                        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">On-device data</div></div>
+                        <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Currencies supported</div></div>
+                        <div class="stat"><div class="stat-num">6</div><div class="stat-label">Chart periods</div></div>
+                    </div>
+                </div>
+
+                <div class="phone" aria-hidden="true">
+                    <div class="phone-screen">
+                        <div class="phone-notch"></div>
+                        <div class="ph-row"><span class="ph-label">Total value</span><span class="ph-val">USD</span></div>
+                        <div class="ph-card">
+                            <div class="ph-hero-num">$128,540.<span style="color: var(--text-secondary); font-size:18px;">62</span></div>
+                            <div style="margin-top:6px;"><span class="ph-pill ph-pos">▲ 2.34%</span> <span style="color: var(--text-secondary); font-size:11px;">today</span></div>
+                            <svg class="ph-spark" viewBox="0 0 200 60" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+                                        <stop offset="0%" stop-color="#3DD68C" stop-opacity="0.4"/>
+                                        <stop offset="100%" stop-color="#3DD68C" stop-opacity="0"/>
+                                    </linearGradient>
+                                </defs>
+                                <path d="M0,42 L20,38 L40,46 L60,30 L80,34 L100,22 L120,28 L140,18 L160,24 L180,12 L200,16 L200,60 L0,60 Z" fill="url(#g1)"/>
+                                <path d="M0,42 L20,38 L40,46 L60,30 L80,34 L100,22 L120,28 L140,18 L160,24 L180,12 L200,16" fill="none" stroke="#3DD68C" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="ph-card">
+                            <div class="ph-row"><span class="ph-label">Holdings</span><span class="ph-label" style="color:var(--accent-2);">See all</span></div>
+                            <div class="ph-list">
+                                <div class="ph-list-item"><div><div class="ph-ticker">AAPL</div><div class="ph-name">Apple Inc.</div></div><span class="ph-pill ph-pos">+1.8%</span></div>
+                                <div class="ph-list-item"><div><div class="ph-ticker">NVDA</div><div class="ph-name">NVIDIA</div></div><span class="ph-pill ph-pos">+4.2%</span></div>
+                                <div class="ph-list-item"><div><div class="ph-ticker">TSLA</div><div class="ph-name">Tesla</div></div><span class="ph-pill ph-neg">-0.9%</span></div>
+                                <div class="ph-list-item"><div><div class="ph-ticker">7203.T</div><div class="ph-name">Toyota</div></div><span class="ph-pill ph-pos">+0.6%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Built for serious investors</h2>
+                    <p>Every screen is engineered to help you understand your money faster — across U.S., European, and Asian markets.</p>
+                </div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🌍</div>
+                        <h3>Global markets</h3>
+                        <p>Browse a curated universe of leading stocks from NYSE, NASDAQ, London, Tokyo, Hong Kong, and Frankfurt. Filter by sector and scan top movers.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">📈</div>
+                        <h3>Detailed charts</h3>
+                        <p>Professional K-line candlesticks with six time periods, interactive crosshair, and mark-to-market indicators. Sparklines on every holding.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">💼</div>
+                        <h3>Portfolio that works</h3>
+                        <p>Log buys and sells, attach receipts, set fees. We auto-compute true average cost, unrealized P/L, realized gains, sector allocation, and a 60-day curve.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🛠</div>
+                        <h3>Smart tools</h3>
+                        <p>Convert between ten major currencies, run a compound growth calculator with monthly contributions, and export your data as JSON, CSV, or summary.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">💡</div>
+                        <h3>Insights</h3>
+                        <p>Read market news grouped by sentiment, study sector heatmaps with live performance, and watch global indices on one screen.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Privacy first</h3>
+                        <p>No account. No login. No tracking. All your trades, notes, and photos stay on your device. You own your data and can export or reset anytime.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="privacy" style="padding-top: 0;">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Designed for iPhone. Built dark, fast, and focused.</h2>
+                    <p>iOS 16 and above. Native SwiftUI. Engineered to feel right at home on your device.</p>
+                </div>
+                <div class="pillars">
+                    <div class="pillar">
+                        <h3>Your money, your device</h3>
+                        <p>Every trade, receipt, note, and watchlist entry is stored locally on your iPhone. Nothing leaves the device unless you export it yourself.</p>
+                    </div>
+                    <div class="pillar">
+                        <h3>Multi-currency, by design</h3>
+                        <p>Hold U.S. dollars, euros, yen, pounds, and more. ENCENE converts holdings into your base currency using built-in reference rates.</p>
+                    </div>
+                    <div class="pillar">
+                        <h3>Mock market data</h3>
+                        <p>For demonstration, ENCENE simulates prices, charts, and news. It is a tracking and journaling tool — not a brokerage or advisor.</p>
+                    </div>
+                    <div class="pillar">
+                        <h3>No advice, no surprises</h3>
+                        <p>ENCENE does not provide investment recommendations. A clear risk disclaimer is presented the first time you use the app.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="download" style="padding-top: 0;">
+            <div class="container">
+                <div class="cta-banner">
+                    <h2>Take control of your portfolio</h2>
+                    <p>Free download. No signup. Just open the app and start tracking.</p>
+                    <a href="#" class="btn btn-primary">Download ENCENE</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container foot">
+            <div>© 2026 ENCENE. All rights reserved.</div>
+            <div class="foot-links">
+                <a href="support.html">Support</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+                <a href="mailto:berrakcantavan@gmail.com">berrakcantavan@gmail.com</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
